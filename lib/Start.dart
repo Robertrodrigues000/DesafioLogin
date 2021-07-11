@@ -1,5 +1,8 @@
+import 'package:desafio_flutter/SignUp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
+
+import 'Login.dart';
 
 class Start extends StatefulWidget {
   Start({Key? key}) : super(key: key);
@@ -9,6 +12,14 @@ class Start extends StatefulWidget {
 }
 
 class _StartState extends State<Start> {
+  navigateToLogin() async {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
+  }
+
+  navigateToRegister() async {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => SignUp()));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +59,7 @@ class _StartState extends State<Start> {
           Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
             MaterialButton(
               padding: EdgeInsets.only(left: 30, right: 30),
-              onPressed: () {},
+              onPressed: navigateToLogin,
               child: Text('LOGIN',
                   style: TextStyle(
                       fontSize: 20,
@@ -62,7 +73,7 @@ class _StartState extends State<Start> {
             SizedBox(width: 20),
             MaterialButton(
               padding: EdgeInsets.only(left: 30, right: 30),
-              onPressed: () {},
+              onPressed: navigateToRegister,
               child: Text('REGISTER',
                   style: TextStyle(
                       fontSize: 20,
