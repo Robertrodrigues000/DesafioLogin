@@ -1,3 +1,4 @@
+import 'package:desafio_flutter/Login.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -31,11 +32,11 @@ class _SignUpState extends State<SignUp> {
       _formKey.currentState!.save();
 
       try {
-        UserCredential user = await _auth.createUserWithEmailAndPassword(
+        await _auth.createUserWithEmailAndPassword(
             email: _email, password: _password);
         await _auth.currentUser!.updateDisplayName(_name);
-      } catch (e) {
-        print(e);
+      } on FirebaseAuthException catch (e) {
+        showError(e.code);
       }
     }
   }
@@ -56,6 +57,10 @@ class _SignUpState extends State<SignUp> {
             ],
           );
         });
+  }
+
+  navigateToLogin() async {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
   }
 
   @override
@@ -129,6 +134,11 @@ class _SignUpState extends State<SignUp> {
                 ),
               ),
             ),
+            SizedBox(height: 20),
+            GestureDetector(
+              child: Text('Já tenho uma conta!'),
+              onTap: navigateToLogin,
+            )
           ],
         ),
       ),

@@ -1,7 +1,8 @@
+import 'package:desafio_flutter/Login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import 'Start.dart';
+import 'Navbar.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
@@ -19,7 +20,7 @@ class _HomePageState extends State<HomePage> {
     _auth.authStateChanges().listen((user) {
       if (user == null) {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Start()));
+            context, MaterialPageRoute(builder: (context) => Login()));
       }
     });
   }
@@ -53,35 +54,13 @@ class _HomePageState extends State<HomePage> {
       body: Container(
         child: !isloggedin
             ? CircularProgressIndicator()
-            : Column(children: <Widget>[
-                Container(
-                  height: 400,
-                  child: Image(
-                    image: AssetImage("images/welcome.jpg"),
-                    fit: BoxFit.contain,
-                  ),
+            : Scaffold(
+                drawer: Navbar(),
+                appBar: AppBar(
+                  title: Text("Seja bem vindo"),
                 ),
-                Container(
-                  child: Text(
-                      "Hello ${user.displayName} you are Logged in as ${user.email}",
-                      style: TextStyle(
-                        fontSize: 20,
-                      )),
-                ),
-                MaterialButton(
-                  padding: EdgeInsets.fromLTRB(70, 10, 70, 10),
-                  onPressed: signOut,
-                  child: Text('LOGOUT',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.bold)),
-                  color: Colors.orange,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.0),
-                  ),
-                )
-              ]),
+                body: Center(),
+              ),
       ),
     );
   }

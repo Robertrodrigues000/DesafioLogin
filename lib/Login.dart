@@ -1,5 +1,7 @@
+import 'package:desafio_flutter/SignUp.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'HomePage.dart';
 
 class Login extends StatefulWidget {
@@ -36,10 +38,9 @@ class _LoginState extends State<Login> {
       try {
         await _auth.signInWithEmailAndPassword(
             email: _email, password: _password);
-        print(user);
-      } catch (e) {
-        
-        print(e);
+      } on FirebaseAuthException catch (e) {
+        showError(e.code);
+        // Fluttertoast.showToast(msg: e.message, gravity: ToastGravity.TOP);
       }
     }
   }
@@ -63,8 +64,7 @@ class _LoginState extends State<Login> {
   }
 
   navigateToSignUp() async {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => HomePage()));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => SignUp()));
   }
 
   @override
@@ -127,9 +127,15 @@ class _LoginState extends State<Login> {
                 ),
               ),
             ),
+            SizedBox(height: 20),
             GestureDetector(
-              child: Text('Create an Account?'),
+              child: Text('Criar uma nova conta'),
               onTap: navigateToSignUp,
+            ),
+            SizedBox(height: 20),
+            GestureDetector(
+              child: Text('Recuperar a senha'),
+              onTap: () {},
             )
           ],
         ),
