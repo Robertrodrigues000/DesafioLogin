@@ -15,7 +15,6 @@ class _NavbarState extends State<Navbar> {
     setState(() {
       user = userData;
     });
-    print(user);
   }
 
   signOut() async {

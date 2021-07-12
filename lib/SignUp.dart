@@ -46,7 +46,7 @@ class _SignUpState extends State<SignUp> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('ERROR'),
+            title: Text('ERRO'),
             content: Text(errormessage),
             actions: <Widget>[
               TextButton(
@@ -73,7 +73,7 @@ class _SignUpState extends State<SignUp> {
             Container(
               height: 400,
               child: Image(
-                image: AssetImage("images/login.jpg"),
+                image: AssetImage("images/signup.jpg"),
                 fit: BoxFit.contain,
               ),
             ),
@@ -85,7 +85,7 @@ class _SignUpState extends State<SignUp> {
                     Container(
                       child: TextFormField(
                           validator: (input) {
-                            if (input!.isEmpty) return 'Enter Name';
+                            if (input!.isEmpty) return 'Nome';
                           },
                           decoration: InputDecoration(
                             labelText: 'Name',
@@ -96,7 +96,7 @@ class _SignUpState extends State<SignUp> {
                     Container(
                       child: TextFormField(
                           validator: (input) {
-                            if (input!.isEmpty) return 'Enter Email';
+                            if (input!.isEmpty) return 'Email';
                           },
                           decoration: InputDecoration(
                               labelText: 'Email',
@@ -107,10 +107,10 @@ class _SignUpState extends State<SignUp> {
                       child: TextFormField(
                           validator: (input) {
                             if (input!.length < 6)
-                              return 'Provide Minimum 6 Character';
+                              return 'A senha precisa ter no mínimo 6 caracteres';
                           },
                           decoration: InputDecoration(
-                            labelText: 'Password',
+                            labelText: 'Senha',
                             prefixIcon: Icon(Icons.lock),
                           ),
                           obscureText: true,
@@ -120,12 +120,12 @@ class _SignUpState extends State<SignUp> {
                     MaterialButton(
                       padding: EdgeInsets.fromLTRB(70, 10, 70, 10),
                       onPressed: signUp,
-                      child: Text('SignUp',
+                      child: Text('Cadastrar',
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 20.0,
                               fontWeight: FontWeight.bold)),
-                      color: Colors.orange,
+                      color: Colors.indigo,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0),
                       ),
